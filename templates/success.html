@@ -1,0 +1,18 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+success
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='css/success.css')}}">
+{% endblock %}
+
+
+{% block content %}
+  <div class="">
+    <h1 class="lead">The user was successfully created!!</h1>
+    <a href="{{ url_for('login') }}" class="btn btn-success">sign in now!</a>
+  </div>
+{% endblock %}

@@ -6,6 +6,7 @@ from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from livereload import Server
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -67,7 +68,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        return '<h1>New user has been created!</h1>'
+        return render_template('success.html')
         #return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
 
     return render_template('signup.html', form=form)
@@ -84,4 +85,6 @@ def logout():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
+    server = Server(app)
+    server.serve(port=5000, host='localhost')
     app.run(debug=True)
