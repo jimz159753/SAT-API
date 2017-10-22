@@ -38,9 +38,10 @@ class RegisterForm(FlaskForm):
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    form = LoginForm()
+    return render_template('index.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -48,7 +49,7 @@ def login():
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user:
+        if user.username == form.username.data:
             if check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('dashboard'))
@@ -56,7 +57,7 @@ def login():
         return '<h1>Invalid username or password</h1>'
         #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
-    return render_template('login.html', form=form)
+    return render_template('index.html', form=form)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
