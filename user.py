@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/jimz/Documents/Projects/building_user_login_system/finish/database.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/jimz/projects/SAT-API/database.sqlite'
 db = SQLAlchemy(app)
 
 class User(UserMixin, db.Model):

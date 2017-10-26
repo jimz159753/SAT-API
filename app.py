@@ -10,7 +10,7 @@ from livereload import Server
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/jimz/Documents/Projects/building_user_login_system/finish/database.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/jimz/projects/SAT-API/database.sqlite'
 Bootstrap(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -77,7 +77,17 @@ def signup():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', name=current_user.username)
+    return render_template('dashboard.html')
+
+@app.route('/products')
+@login_required
+def products():
+    return render_template('products.html')
+
+@app.route('/customers')
+@login_required
+def customers():
+    return render_template('customers.html')
 
 @app.route('/logout')
 @login_required
