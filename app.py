@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
@@ -10,7 +10,7 @@ from livereload import Server
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/jimz/projects/SAT-API/database.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/jimz/Documents/Projects/SAT-API/database.sqlite'
 Bootstrap(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -22,6 +22,14 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
+
+class Customer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    razon = db.Column(db.String(15), unique=True)
+    rfc = db.Column(db.String(15), unique=True)
+    tel = db.Column(db.String(15), unique=True)
+    correo = db.Column(db.String(15), unique=True)
+    estado = db.Column(db.String(15), unique=True)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -84,9 +92,18 @@ def dashboard():
 def products():
     return render_template('products.html')
 
-@app.route('/customers')
+@app.route('/customers', methods=['GET', 'POST'])
 @login_required
 def customers():
+    if request.method == 'POST':
+        razon = request.form['razon']
+        rfc = request.form['rfc']
+        tel = request.form['tel']
+        correo = request.form['correo']
+        estado = request.form['estado']
+        adding = Customer(razon=razon, rfc=rfc, tel=tel, correo=correo, estado=estado)
+        db.session.add(adding)
+        db.session.commit()
     return render_template('customers.html')
 
 @app.route('/logout')

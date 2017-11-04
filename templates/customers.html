@@ -23,13 +23,13 @@
           				<button type="button" class="close" data-dismiss="modal">&times;</button>
         			</div>
         			<div class="modal-body">
-                        <form method="POST"  autocomplete="off" action="">
+                        <form method="POST" action="/customers">
                             <div class="row" style="margin-top:10px;">
                                 <div class="col-md-6" align="center">
                                     <label>Nombre o razon social</label>
                                 </div>
                                 <div class="col-md-6" align="center">
-                                    <input type="text" class="form-control" required="true">
+                                    <input type="text" class="form-control" required="true" name="razon">
                                 </div>
                             </div>
                             <div class="row" style="margin-top:10px;">
@@ -37,7 +37,7 @@
                                     <label>RFC</label>
                                 </div>
                                 <div class="col-md-6" align="center">
-                                    <input type="text" class="form-control" required="true">
+                                    <input type="text" class="form-control" required="true" name="rfc">
                                 </div>
                             </div>
                             <div class="row" style="margin-top:10px;">
@@ -45,7 +45,7 @@
                                     <label>Telefono</label>
                                 </div>
                                 <div class="col-md-6" align="center">
-                                    <input type="tel" class="form-control" required="true">
+                                    <input type="tel" class="form-control" required="true" name="tel">
                                 </div>
                             </div>
                             <div class="row" style="margin-top:10px;">
@@ -53,7 +53,7 @@
                                     <label>Correo electronico</label>
                                 </div>
                                 <div class="col-md-6" align="center">
-                                    <input type="email" class="form-control" required="true">
+                                    <input type="email" class="form-control" required="true" name="correo">
                                 </div>
                             </div>
                             <div class="row" style="margin-top:10px;">
@@ -61,7 +61,7 @@
                                     <label>Estado</label>
                                 </div>
                                 <div class="col-md-6" align="center">
-                                    <select  class="form-control">
+                                    <select  class="form-control" name="estado">
                                         <option>JALISCO</option>
                                         <option>BAJA CALIFORNIA SUR</option>
                                         <option>PUEBLA</option>
@@ -72,7 +72,7 @@
                                 <div class="col-md-6" align="center">
                                 </div>
                                 <div class="col-md-6" align="right">
-                                    <button>Capturar</button>
+                                    <input type="submit" value="Capturar">
                                 </div>
                             </div>
                         </form>
